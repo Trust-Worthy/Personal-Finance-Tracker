@@ -1,11 +1,14 @@
 import pandas as pd
 import csv
 from datetime import datetime
+from pathlib import Path
+from typing import Union
+from data_entry import get_amount,get_category,get_date,get_description
 
 
 class CSV:
-    CSV_FILE: str = 'finance_data.csv'
-    COLUMNS: list = ["date","amount","category","description"]
+    CSV_FILE: Union[str,Path] = 'finance_data.csv'
+    COLUMNS: list[str] = ["date","amount","category","description"]
 
     @classmethod
     def initialize_csv(cls)->None:
@@ -16,7 +19,7 @@ class CSV:
             df.to_csv(cls.CSV_FILE,index=False)
 
     @classmethod
-    def add_entry(cls,date:str,amount:int,category:str,description:str)->None:
+    def add_entry(cls,*,date:str,amount:float,category:str,description:str)->None:
         new_entry: dict = {
             "date": date,
             "amount": amount,
@@ -28,8 +31,19 @@ class CSV:
             writer.writerow(new_entry)
         print("Entry added successfully")
 
+def add()->None:
+    CSV.initialize_csv()
+    date: str = get_date(
+        "Enter the date of the transaction (dd-mm-yyyy) or hit 'enter' for today's date: ", 
+        allow_default=True,
+    )
+    amount: float = get_amount()
+    category: str = get_category()
+    description: str = get_description()
+    CSV.add_entry(date=date,amount=amount,category=category,description=description)
+    
+
     
 
 
-CSV.initialize_csv()
-CSV.add_entry("20-07-2024",125.64,"income","Salary")
+add()

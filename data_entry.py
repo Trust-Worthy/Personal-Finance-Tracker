@@ -1,8 +1,9 @@
 from datetime import datetime
 
-date_format = "%d-%m-%Y"
+date_format:str = "%d-%m-%Y"
+CATEGORIES: dict[str,str] = {"I": "Income","E":"Expense"}
 
-def get_date(prompt:str, allow_default=False)->str:
+def get_date(prompt:str, allow_default:bool =False)->str:
     date_str:str = input(prompt)
 
     if allow_default and not date_str:
@@ -28,8 +29,14 @@ def get_amount()->float:
         return get_amount()
     
 
-def get_category():
-    raise NotImplementedError
+def get_category()->str:
+    category:str = input("Enter the category ('I' for Income or 'E' for Expense): ").upper()
+    
+    if category in CATEGORIES:
+        return CATEGORIES[category]
+    else:
+        print("Invalid category. Please enter 'I' for Income or 'E' for Expense")
+        return get_category()
 
 def get_description():
-    raise NotImplementedError
+    return input("Enter a description (optional): ")

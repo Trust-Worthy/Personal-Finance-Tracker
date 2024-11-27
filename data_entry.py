@@ -1,3 +1,10 @@
+"""_summary_
+
+    Author: Trust-Worthy
+"""
+
+
+
 from datetime import datetime
 
 date_format:str = "%d-%m-%Y"

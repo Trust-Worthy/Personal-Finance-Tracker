@@ -7,7 +7,7 @@ __pycache__/
 *.so
 
 # files generated
-.csv
+*.csv
 # Distribution / packaging
 .Python
 build/

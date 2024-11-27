@@ -26,10 +26,17 @@ class Microwave:
         else:
             print(f'A mystical forcer whispers: "Turn on your microwave first..."')
 
+    def __add__(self,other)-> None:
+        return f'{self.brand} + {other.brand}'
+
+    def __str__(self) -> str:
+        return f'{self.brand} (Rating: {self.power_rating})'
+    def __repr__(self) -> str:
+        return f'Microwave(brand="{self.brand}", power_rating="{self.power_rating}")'
+m1: Microwave = Microwave(brand="m1",power_rating="A+")
+
+m2: Microwave = Microwave(brand="m2",power_rating="A-")
 
 
-m1: Microwave = Microwave(brand="yeep",power_rating="A+")
-
-m1.turn_on()
-m1.turn_on()
+print(repr(m1))
 
